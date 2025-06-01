@@ -37,6 +37,7 @@ require("lazy").setup({
 vim.o.updatetime = 250
 vim.cmd[[autocmd CursorHold * lua vim.diagnostic.open_float(nil, {focus=false})]]
 require('keymap')
+require('cmds')
 -- General indentation settings
 vim.opt.smartindent = true
 vim.opt.autoindent = true
