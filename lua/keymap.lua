@@ -12,3 +12,7 @@ vim.keymap.set("i", "<C-e>", "<End>", { desc = "move end of line" })
 vim.keymap.set("i", "<C-h>", "<Left>", { desc = "move left" })
 vim.keymap.set("i", "<C-l>", "<Right>", { desc = "move right" })
 vim.keymap.set("i", "<C-j>", "<Down>", { desc = "move down" })
+
+vim.keymap.set("n", "ca", vim.lsp.buf.code_action)
+vim.keymap.set("n", "hs", ":ClangdSwitchSourceHeader<CR>", {noremap = true, silent = true})
+
