@@ -7,19 +7,19 @@ vim.cmd([[packadd lazy.nvim]])
 --colorscheme
 vim.cmd.colorscheme("retrobox")
 
-local lazypath = vim.fn.stdpath("data") .. "/site/pack/lazy/start/lazy.nvim"
-if not vim.loop.fs_stat(lazypath) then
-  vim.fn.system({
-    "git",
-    "clone",
-    "--filter=blob:none",
-    "https://github.com/folke/lazy.nvim.git",
-    "--branch=stable", -- latest stable release
-    lazypath,
-  })
-end
+-- local lazypath = vim.fn.stdpath("data") .. "/site/pack/lazy/start/lazy.nvim"
+-- if not vim.loop.fs_stat(lazypath) then
+--   vim.fn.system({
+--     "git",
+--     "clone",
+--     "--filter=blob:none",
+--     "https://github.com/folke/lazy.nvim.git",
+--     "--branch=stable", -- latest stable release
+--     lazypath,
+--   })
+-- end
 -- vim.opt.rtp:prepend(lazypath)
-
+vim.opt.splitright = true
 require("lazy").setup({
 	"nvim-treesitter/nvim-treesitter",
   	"nvim-lua/plenary.nvim",
@@ -33,7 +33,6 @@ require("lazy").setup({
 	"L3MoN4D3/LuaSnip",
 	"saadparwaiz1/cmp_luasnip",
 })
-
 vim.o.updatetime = 250
 vim.cmd[[autocmd CursorHold * lua vim.diagnostic.open_float(nil, {focus=false})]]
 require('keymap')
@@ -48,12 +47,13 @@ vim.opt.nu = true
 vim.opt.relativenumber = true
 vim.opt.signcolumn = "yes"
 vim.opt.colorcolumn = "80"
-vim.api.nvim_set_hl(0, "colorColumn", { bg = "#800000"})
-vim.opt.scrolloff = 8
+vim.api.nvim_set_hl(0, "colorColumn", { bg = "#558a01"})
+vim.opt.scrolloff = 12
+
 --treesitter
 require'nvim-treesitter.configs'.setup {
   -- A list of parser names, or "all" (the listed parsers MUST always be installed)
-  ensure_installed = { "c", "lua", "cpp"},
+  ensure_installed = { "c", "cpp", "glsl"},
   highlight = {
     enable = true,
     -- disable = { "c", "rust" },
@@ -180,3 +180,29 @@ cmp.setup({
 		    { name = 'luasnip' },
 		  })
 })
+
+-- Disable built-in plugins
+local disabled_built_ins = {
+	"gzip",
+	"tar",
+	"tarPlugin",
+	"zip",
+	"zipPlugin",
+	"getscript",
+	"getscriptPlugin",
+	"vimball",
+	"vimballPlugin",
+	"2html_plugin",
+	"logiPat",
+	"rrhelper",
+	"netrw",
+	"netrwPlugin",
+	"netrwSettings",
+	"netrwFileHandlers",
+	"Tohtml",
+}
+
+for _, plugin in ipairs(disabled_built_ins) do
+	vim.g["loaded_" .. plugin] = 1
+end
+
